@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UsuarioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function () { return view('sitio.login'); });
+Route::any('panel', function () { return view('sitio.panel'); })->name('panel');
+
+Route::group(['prefix' => 'usuario'], function () {
+	Route::post('validarLogin', [UsuarioController::class, 'validarLogin']);
 });
