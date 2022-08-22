@@ -3,10 +3,15 @@
 <style>
     .tabs{ display: none; }
 </style>
-<form class="multisteps-form__form mb-8" id="form">
+<form id="form-PUBLICACIONES">
     <h5 class="font-weight-bolder mb-0">Formato de solicitud</h5>
     <div id="tab-1" class="tabs">{{ view('publicaciones.tabs.identificacion-obra') }}</div>
     <div id="tab-2" class="tabs">{{ view('publicaciones.tabs.tipo-obra') }}</div>
+    <div id="tab-3" class="tabs">3</div>
+    <div id="tab-4" class="tabs">4</div>
+    <div id="tab-5" class="tabs">5</div>
+    <div id="tab-6" class="tabs">6</div>
+    <div id="tab-7" class="tabs">7</div>
     <div class="button-row mt-4" style="text-align: end;">
         <button id="btn-anterior" style="display: none;" class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" onclick="anterior()" type="button"
             title="Next">Anterior</button>
@@ -61,9 +66,18 @@
     }
 
     function validarTab() {
-        $(`.tabs`).fadeOut()
-        $(`#tab-${tab_actual}`).fadeIn()
-        if (tab_actual != 1) $("#btn-anterior").fadeIn(); else $("#btn-anterior").fadeout();
+        if (tab_actual != tab_ultima + 1) {
+            $(`.tabs`).fadeOut()
+            $(`#tab-${tab_actual}`).fadeIn()
+            if (tab_actual != 1) $("#btn-anterior").fadeIn(); else $("#btn-anterior").fadeOut();
+            if (tab_actual == tab_ultima) $("#btn-siguiente").html("Enviar solicitud"); else $("#btn-siguiente").html("Siguiente")
+        }else{
+            enviarSolicitud()
+        }        
+    }
+
+    function enviarSolicitud() {
+        alert("Guardando")
     }
     
 </script>
