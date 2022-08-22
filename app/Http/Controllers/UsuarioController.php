@@ -23,9 +23,10 @@ class UsuarioController extends Controller
                         return back()->withErrors(['error' => 'Acceso denegado']);
                     }
                     session([
-                        'id_usuario'         => $usuario->id_usuario,
-                        'id_tercero_usuario' => $usuario->tercero->id_tercero,
-                        'id_perfil'          => $usuario->id_perfil,
+                        'id_usuario'         => $usuario->id,
+                        'id_tercero_usuario' => $usuario->tercero->id,
+                        'id_perfil'          => $usuario->perfil_id,
+                        'nombre_usuario'     => $usuario->usuario,
                     ]);
                     return redirect()->route('panel');
                 }
@@ -36,7 +37,7 @@ class UsuarioController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function cerrarSesion(Request $request)
     {
         $request->session()->flush();
         return redirect('/');

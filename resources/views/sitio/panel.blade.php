@@ -1,1 +1,4 @@
-<h1>Hola mundo</h1>
+@extends('layout.principal')
+@section('content')
+
+@endsection
