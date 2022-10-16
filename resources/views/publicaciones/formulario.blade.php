@@ -7,11 +7,11 @@
     <h5 class="font-weight-bolder mb-0">Formato de solicitud</h5>
     <div id="tab-1" class="tabs">{{ view('publicaciones.tabs.identificacion-obra') }}</div>
     <div id="tab-2" class="tabs">{{ view('publicaciones.tabs.tipo-obra') }}</div>
-    <div id="tab-3" class="tabs">3</div>
-    <div id="tab-4" class="tabs">4</div>
-    <div id="tab-5" class="tabs">5</div>
-    <div id="tab-6" class="tabs">6</div>
-    <div id="tab-7" class="tabs">7</div>
+    <div id="tab-3" class="tabs">{{ view('publicaciones.tabs.publico-obra') }}</div>
+    <div id="tab-4" class="tabs">{{ view('publicaciones.tabs.formato-obra') }}</div>
+    <div id="tab-5" class="tabs">{{ view('publicaciones.tabs.informacion-tecnica') }}</div>
+    <div id="tab-6" class="tabs">{{ view('publicaciones.tabs.informacion-complementaria') }}</div>
+    <div id="tab-7" class="tabs">{{ view('publicaciones.tabs.anexos') }}</div>
     <div class="button-row mt-4" style="text-align: end;">
         <button id="btn-anterior" style="display: none;" class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" onclick="anterior()" type="button"
             title="Next">Anterior</button>
@@ -42,17 +42,18 @@
             resultado += `<option value="${item.departamento}">${item.departamento}</option>`
         })
         $("#select-departamento").html(resultado)
+        $("#select-coautor-departamento").html(resultado)
     }
 
-    function pintarMunicipios(dpto) {
+    function pintarMunicipios(dpto, id) {
         let resultado = ""
         let departamento = this.departamentos.find(p => p.departamento == dpto)
         if (departamento) {
             departamento.ciudades.forEach((item) => {
-            resultado += `<option value="${item}">${item}</option>`
-        })
+                resultado += `<option value="${item}">${item}</option>`
+            })
         }
-        $("#select-municipio").html(resultado)
+        $("#" + id).html(resultado)
     }
 
     function siguiente() {
@@ -74,6 +75,11 @@
         }else{
             enviarSolicitud()
         }        
+    }
+
+
+    function alerta(titulo, mensaje, tipo) {
+        alert(mensaje)
     }
 
     function enviarSolicitud() {

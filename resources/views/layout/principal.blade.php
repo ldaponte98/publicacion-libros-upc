@@ -30,6 +30,12 @@
     .btn-end{
       text-align: right ;
     }
+    .btn-close {
+      color: #000; 
+    }
+    .btn-close:hover{
+      color: #000; 
+    }
   </style>
 </head>
 @php

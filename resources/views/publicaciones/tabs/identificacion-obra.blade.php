@@ -84,11 +84,15 @@
     <div class="row mt-3">
         <div class="col-12 col-sm-6">
             <label>Departamento</label>
-            <select data-placeholder="seleccione..." onchange="pintarMunicipios(this.value)" id="select-departamento" name="departamento" class="form-control select2" required></select>
+            <select data-placeholder="seleccione..." onchange="pintarMunicipios(this.value, 'select-municipio')" id="select-departamento" name="departamento" class="form-control select2" required></select>
         </div>
         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
             <label>Municipio</label>
-            <select data-placeholder="seleccione..." id="select-municipio" name="municipio" class="form-control select2" required></select>
+            <select data-placeholder="Seleccione..." id="select-municipio" name="municipio" class="form-control select2" required></select>
         </div>
     </div>
+    <hr class="horizontal dark mt-4">
+    
+    {{ view('publicaciones.tabs.tabla-coautores') }}
+
 </div>
