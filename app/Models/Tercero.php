@@ -14,4 +14,9 @@ class Tercero extends Model
         'email',
         'estado',
     ];
+
+    public function nombreCompleto()
+    {
+        return $this->nombres . " " . $this->apellidos;
+    }
 }

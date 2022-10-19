@@ -26,6 +26,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+
   <style>
     .btn-end{
       text-align: right ;
@@ -35,6 +37,15 @@
     }
     .btn-close:hover{
       color: #000; 
+    }
+    .icon-action{
+      font-size: 12px;
+    }
+    .color-black{
+      color: black;
+    }
+    .checkbox{
+      cursor: pointer;
     }
   </style>
 </head>
@@ -95,6 +106,21 @@
     $('.select2').select2( {
         theme: 'bootstrap-5'
     });
+
+    function alerta(titulo, mensaje, tipo) {
+        alert(mensaje)
+    }
+
+    function setFiltro(id_input_filtro, id_tabla) {
+        $(`#${id_input_filtro}`).keyup(function() {
+            var rex = new RegExp($(this).val(), 'i');
+            $(`#${id_tabla} tbody tr`).hide();
+            $(`#${id_tabla} tbody tr`).filter(function() {
+                return rex.test($(this).text());
+            }).show();
+        })
+    }
+
   </script>
 
 </body>

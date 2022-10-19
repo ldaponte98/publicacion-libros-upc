@@ -24,5 +24,15 @@ Route::group(['prefix' => 'usuario'], function () {
 
 Route::group(['prefix' => 'publicacion'], function () {
 	Route::any('mis-publicaciones', [PublicacionController::class, 'misPublicaciones'])->name('publicacion/mis-publicaciones');
-	Route::any('crear', [PublicacionController::class, 'crear'])->name('publicacion/crear');
+	Route::any('publicaciones-docentes', [PublicacionController::class, 'publicacionesDocentes'])->name('publicacion/publicaciones-docentes');
+	Route::any('publicaciones-por-revisar', [PublicacionController::class, 'publicacionesPorRevisarEvaluadores'])->name('publicacion/publicaciones-por-revisar');
+	Route::any('crear', [PublicacionController::class, 'guardar'])->name('publicacion/crear');
+	Route::any('detalle/{id}', [PublicacionController::class, 'detalle'])->name('publicacion/detalle');
+	Route::any('editar/{id}', [PublicacionController::class, 'guardar'])->name('publicacion/editar');
+	Route::post('rechazar', [PublicacionController::class, 'rechazar'])->name('publicacion/rechazar');
+	Route::post('aprobar', [PublicacionController::class, 'aprobar'])->name('publicacion/aprobar');
+	Route::post('enviar-evaluadores', [PublicacionController::class, 'enviarEvaluadores'])->name('publicacion/enviar-evaluadores');
+	Route::post('anular', [PublicacionController::class, 'anular'])->name('publicacion/anular');
+	Route::post('enviar-evaluadores-varias', [PublicacionController::class, 'enviarEvaluadoresVarias'])->name('publicacion/enviar-evaluadores-varias');
+	Route::any('calificar/{id}', [PublicacionController::class, 'calificar'])->name('publicacion/calificar');
 });
