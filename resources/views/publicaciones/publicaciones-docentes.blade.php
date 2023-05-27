@@ -6,7 +6,7 @@
 </div>
 <div class="row">
   <div class="col-9">
-    <a class="btn bg-gradient-dark mb-0" onclick="enviarEVALUADORES()">
+    <a class="btn bg-gradient-dark mb-0" onclick="enviarEvaluadores()">
         <i class="fas fa-send" aria-hidden="true"></i>&nbsp;&nbsp;<b id="btn-enviar">Enviar a evaluadores los seleccionados</b>
       </a>
   </div>
@@ -98,7 +98,7 @@
     }
 
     if(listaPublicaciones.length == 0){
-        alerta("Error", "Debe seleccionar por lo menos una publicación para envio")
+        alerta("Error", "Debe seleccionar por lo menos una publicación en estado [APROBADA - SIN ENVIO A EVALUADORES] para envio")
         return false
     }
 

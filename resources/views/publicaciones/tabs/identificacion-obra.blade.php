@@ -32,26 +32,13 @@
         </div>
         <div class="col-12 col-sm-6">
             <label>Programa Académico y Facultad a la que está adscrito el solicitante</label>
-            <select name="programa_academico" id="programa_academico" class="form-control select2" required @if($data->readonly == true) disabled @endif>
-                <option @if($data->publicacion->programa_academico == "Administracion de Empresa") selected @endif value="Administracion de Empresa">Administracion de Empresa</option>
-                <option @if($data->publicacion->programa_academico == "Licenciatura en Matematicas y Fisica") selected @endif value="Licenciatura en Matematicas y Fisica">Licenciatura en Matematicas y Fisica</option>
-                <option @if($data->publicacion->programa_academico == "Licenciatura en Espanol e Ingles") selected @endif value="Licenciatura en Espanol e Ingles">Licenciatura en Espanol e Ingles</option>
-                <option @if($data->publicacion->programa_academico == "Licenciatura en ciencias Naturales y Educacion Amb...") selected @endif value="Licenciatura en ciencias Naturales y Educacion Amb...">Licenciatura en ciencias Naturales y Educacion Amb...</option>
-                <option @if($data->publicacion->programa_academico == "Licenciatura en educacion fisica, recreacion y dep...") selected @endif value="Licenciatura en educacion fisica, recreacion y dep...">Licenciatura en educacion fisica, recreacion y dep...</option>
-                <option @if($data->publicacion->programa_academico == "Microbiologia") selected @endif value="Microbiologia">Microbiologia</option>
-                <option @if($data->publicacion->programa_academico == "Instrumentacion Quirurgica") selected @endif value="Instrumentacion Quirurgica">Instrumentacion Quirurgica</option>
-                <option @if($data->publicacion->programa_academico == "Enfermeria") selected @endif value="Enfermeria">Enfermeria</option>
-                <option @if($data->publicacion->programa_academico == "Ingenieria Electronica") selected @endif value="Ingenieria Electronica">Ingenieria Electronica</option>
-                <option @if($data->publicacion->programa_academico == "Ingenieria de Sistemas") selected @endif value="Ingenieria de Sistemas">Ingenieria de Sistemas</option>
-                <option @if($data->publicacion->programa_academico == "Ingenieria Ambiental y Sanitaria") selected @endif value="Ingenieria Ambiental y Sanitaria">Ingenieria Ambiental y Sanitaria</option>
-                <option @if($data->publicacion->programa_academico == "Comercio Internacional") selected @endif value="Comercio Internacional">Comercio Internacional</option>
-                <option @if($data->publicacion->programa_academico == "Contaduria Publica") selected @endif value="Contaduria Publica">Contaduria Publica</option>
-                <option @if($data->publicacion->programa_academico == "Economia") selected @endif value="Economia">Economia</option>
-                <option @if($data->publicacion->programa_academico == "Derecho") selected @endif value="Derecho">Derecho</option>
-                <option @if($data->publicacion->programa_academico == "Psicologia") selected @endif value="Psicologia">Psicologia</option>
-                <option @if($data->publicacion->programa_academico == "Sociologia") selected @endif value="Sociologia">Sociologia</option>
-                <option @if($data->publicacion->programa_academico == "Ingenieria Agroindustrial") selected @endif value="Ingenieria Agroindustrial">Ingenieria Agroindustrial</option>
-                <option @if($data->publicacion->programa_academico == "Administración de comercio internacional") selected @endif value="Administración de comercio internacional">Administración de comercio internacional</option>
+            <select name="id_dominio_programa_academico" id="programa_academico" class="form-control select2" required @if($data->readonly == true) disabled @endif>
+                @php $items = \App\Models\Dominio::all()->where('padre_id', 10); @endphp
+                @foreach ($items as $item)
+                    <option @if($data->publicacion->id_dominio_programa_academico == $item->id)
+                        selected
+                    @endif value="{{ $item->id }}">{{ $item->nombre }}</option>
+                @endforeach
             </select>
         </div>
     </div>
@@ -60,10 +47,12 @@
             <input type="hidden" name="formacion_academica" id="formacion_academica" >
             <label>Formación académica del solicitante</label>
             <select data-placeholder="Seleccione una o más..." id="select_formacion_academica" class="form-control select2" multiple required @if($data->readonly == true) disabled @endif>
-                <option @if(strpos($data->publicacion->formacion_academica, "Profesional") !== false) selected @endif value="Profesional">Profesional</option>
-                <option @if(strpos($data->publicacion->formacion_academica, "Especialización") !== false) selected @endif value="Especialización">Especialización</option>
-                <option @if(strpos($data->publicacion->formacion_academica, "Maestría") !== false) selected @endif value="Maestría">Maestría</option>
-                <option @if(strpos($data->publicacion->formacion_academica, "Doctorado") !== false) selected @endif value="Doctorado">Doctorado</option>
+                @php $items = \App\Models\Dominio::all()->where('padre_id', 12); @endphp
+                @foreach ($items as $item)
+                    <option @if(strpos($data->publicacion->formacion_academica, $item->nombre) !== false)
+                        selected
+                    @endif value="{{ $item->nombre }}">{{ $item->nombre }}</option>
+                @endforeach
             </select>
         </div>
         <div class="col-12 col-sm-6">

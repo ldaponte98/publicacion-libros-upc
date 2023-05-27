@@ -9,7 +9,7 @@ class Publicacion extends Model
     protected $table      = 'publicacion';
     protected $fillable   = [
         "titulo_obra", "id_dominio_area_conocimiento", "id_dominio_subarea_conocimiento", 
-        "programa_academico", "formacion_academica", "telefono", 
+        "id_dominio_programa_academico", "formacion_academica", "telefono", 
         "email", "direccion", "departamento", "municipio", 
         "tipo_obra", "libro_resultado_investigacion_nombre_proyecto", 
         "libro_resultado_investigacion_fuente", "libro_resultado_investigacion_nombre_entidad", 

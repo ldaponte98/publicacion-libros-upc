@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\PublicacionController;
+use App\Http\Controllers\DominioController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +21,16 @@ Route::any('panel', function () { return view('sitio.panel'); })->name('panel');
 Route::group(['prefix' => 'usuario'], function () {
 	Route::post('validarLogin', [UsuarioController::class, 'validarLogin']);
 	Route::any('cerrarSesion', [UsuarioController::class, 'cerrarSesion'])->name('usuario/cerrarSesion');
+	Route::get('listar', [UsuarioController::class, 'listar'])->name('usuario/listar');
+	Route::get('ver/{id}', [UsuarioController::class, 'ver'])->name('usuario/ver');
+	Route::any('editar/{id}', [UsuarioController::class, 'form'])->name('usuario/editar');
+	Route::any('crear', [UsuarioController::class, 'form'])->name('usuario/crear');
+});
+
+Route::group(['prefix' => 'dominio'], function () {
+	Route::get('listar', [DominioController::class, 'listar'])->name('dominio/listar');
+	Route::get('ver/{id}', [DominioController::class, 'ver'])->name('dominio/ver');
+	Route::any('editar/{id}', [DominioController::class, 'form'])->name('dominio/editar');
 });
 
 Route::group(['prefix' => 'publicacion'], function () {

@@ -99,7 +99,7 @@
     })
 
     function buscarDepartamentos() {
-        let url = "{{ config('global.url_base') }}/departamentos-ciudades.json"
+        let url = "https://app.onbeds.co/departamentos-ciudades.json"
         $.get(url).then((response) => {
             this.departamentos = response
             pintarDepartamentos()

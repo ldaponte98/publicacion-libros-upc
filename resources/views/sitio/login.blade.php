@@ -4,8 +4,6 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset("plantilla/assets/img/apple-icon.png") }}">
-  <link rel="icon" type="image/png" href="{{ asset("plantilla/assets/img/apple-icon.png") }}">
   
   <title>
     Fondo de Publicaciones Unicesar
@@ -20,6 +18,11 @@
   <link href="{{ asset("plantilla/assets/css/nucleo-svg.css") }}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset("plantilla/assets/css/soft-ui-dashboard.css?v=1.0.6") }}" rel="stylesheet" />
+  <style>
+    .text-gradient.text-info, .bg-gradient-info {
+      background-image: linear-gradient(310deg, #3dac4c 0%, #3dac4c 100%);
+    }
+  </style>
 </head>
 
 <body class="">
@@ -63,12 +66,7 @@
                     </div>
                   </form>
                 </div>
-                <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                  <p class="mb-4 text-sm mx-auto">
-                    ¿No tienes una cuenta?
-                    <a href="javascript:;" class="text-info text-gradient font-weight-bold">Solicitarla</a>
-                  </p>
-                </div>
+                
               </div>
             </div>
             <div class="col-md-6">
