@@ -270,18 +270,53 @@ class PublicacionController extends Controller
     {
         $post = $request->all();
         $errores = [];
+        $readonly = false;
+        $errores = [];
         $calificacion = new PublicacionCalificacion();
-        $calificacion->estado = "No registrada";
+        $calificacion->estado_evaluacion_final = "No registrada";
         if($id != null) $publicacion = Publicacion::find($id);
         if($publicacion == null) { echo "Acceso denegado"; die;}
         
-        if($post){
-            $post = (object) $post;     
+        $busqueda = PublicacionCalificacion::where('publicacion_id', $id)->first();
+        if($busqueda != null){
+            $readonly = true;
+            $calificacion = $busqueda;
+        }else{
+            if($post){
+                $post = (object) $post;  
+                $calificacion->fill($request->except(['_token', 'archivo_firma']));
+                $calificacion->publicacion_id = $id;
+                $calificacion->tercero_id = session('id_tercero_usuario');
+                if ($calificacion->save()) {
+                    $publicacion->estado = $post->estado_evaluacion_final;
+                    if($publicacion->estado == "APROBADA"){
+                        $publicacion->id_usuario_aprueba_parents = session("id_usuario");
+                    }else{
+                        $publicacion->id_usuario_rechaza_parents =  session("id_usuario");
+                        $publicacion->observaciones_rechazo_parents = $post->observaciones;
+                    }
+                    $archivo_firma  = $request->file('archivo_firma');
+                    if ($archivo_firma) {
+                        $ruta           = '/archivos/firmas-digitales';
+                        $extension      = explode('.', $archivo_firma->getClientOriginalName())[1];
+                        $nombre_archivo = rand(10000, 99999) . "-" . date('Y-m-d-H-i-s') . "." . $extension;
+                        Storage::disk('public')->put($ruta . "/" . $nombre_archivo, \File::get($archivo_firma));
+                        $calificacion->archivo_firma = $nombre_archivo;
+                    }
+                    $publicacion->save();
+                    $calificacion->save();
+                    $readonly = true;
+                } else {
+                    $errores = $calificacion->errors;
+                } 
+            }
         }
+        
         $data = (object)[
             'publicacion' => $publicacion,
             'calificacion' => $calificacion,
-            'readonly' => false
+            'readonly' => $readonly,
+            'errores' => $errores
         ];
         return view('calificaciones.formulario', compact(['data']));
     }

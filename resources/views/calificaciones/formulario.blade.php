@@ -15,7 +15,7 @@
         </div>
         @if($data->publicacion->estado != null) 
         <div class="col-sm-6 text-end">
-            <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next color-black" type="button">Calificacion: {{ $data->calificacion->estado }}</button>
+            <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next color-black" type="button">Calificacion: {{ $data->calificacion->estado_evaluacion_final }}</button>
         </div>
         @endif
     </div>
@@ -23,7 +23,9 @@
     <div id="tab-1" class="tabs">{{ view("calificaciones.tabs.datos-basicos", compact(['data'])) }}</div>
     <div id="tab-2" class="tabs">{{ view("calificaciones.tabs.datos-basicos-evaluador", compact(['data'])) }}</div>
     <div id="tab-3" class="tabs">{{ view("calificaciones.tabs.tipo-obra", compact(['data'])) }}</div>
-    <div id="tab-4" class="tabs">{{ view("calificaciones.tabs.evaluacion", compact(['data'])) }}</div>
+    <div id="tab-4" class="tabs">{{ view("calificaciones.tabs.evaluacion-parte-1", compact(['data'])) }}</div>
+    <div id="tab-5" class="tabs">{{ view("calificaciones.tabs.evaluacion-parte-2", compact(['data'])) }}</div>
+    <div id="tab-6" class="tabs">{{ view("calificaciones.tabs.evaluacion-parte-3", compact(['data'])) }}</div>
     <div class="alert alert-danger oculto mt-3" id="div-errores" onclick="$('#div-errores').fadeOut()">
         
     </div>
@@ -36,8 +38,8 @@
 </form>
 
 <script>
-    var tab_actual = 3
-    var tab_ultima = 4
+    var tab_actual = 0
+    var tab_ultima = 6
     var departamentos = []
     var erroresFormulario = []
 
@@ -86,9 +88,11 @@
         @if($data->readonly == true) return true; @endif
         this.erroresFormulario = []
         if (tab_actual == 1) validacionesTab1()
-        //if (tab_actual == 2) validacionesTab2()
-        //if (tab_actual == 3) validacionesTab3()
+        if (tab_actual == 2) validacionesTab2()
+        if (tab_actual == 3) validacionesTab3()
         if (tab_actual == 4) validacionesTab4()
+        if (tab_actual == 5) validacionesTab5()
+        if (tab_actual == 6) validacionesTab6()
         if(this.erroresFormulario.length > 0){
             visualizarErrores()
             return false
@@ -101,6 +105,8 @@
         validacionesTab2()
         validacionesTab3()
         validacionesTab4()
+        validacionesTab5()
+        validacionesTab6()
     }
 
     function visualizarErrores(nombreTab, mensaje) {

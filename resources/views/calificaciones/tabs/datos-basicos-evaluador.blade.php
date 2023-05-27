@@ -11,7 +11,7 @@
     <div class="row mt-3">
         <div class="col-12 col-sm-6">
             <label>Fecha de nacimiento</label>
-            <input name="evaluador_fecha_nacimiento" id="evaluador_fecha_nacimiento" class="form-control" type="text"
+            <input name="evaluador_fecha_nacimiento" id="evaluador_fecha_nacimiento" class="form-control" type="date"
                 onfocus="focused(this)" value="{{ $data->calificacion->evaluador_fecha_nacimiento }}" onfocusout="defocused(this)" @if($data->readonly == true) disabled @endif>
         </div>
         <div class="col-12 col-sm-6">
@@ -50,13 +50,13 @@
 
     <div class="row mt-3">
         <div class="col-12 col-sm-6">
-            <input type="hidden" name="evaluador_nivel_formacion">
+            <input type="hidden" name="evaluador_nivel_formacion" id="evaluador_nivel_formacion">
             <label>Nivel de formación</label>
             <select data-placeholder="Seleccione una o más..." id="select_nivel_formacion" class="form-control select2" multiple required @if($data->readonly == true) disabled @endif>
-                <option @if(strpos($data->calificacion->nivel_formacion, "Especialización") !== false) selected @endif value="Especialización">Especialización</option>
-                <option @if(strpos($data->calificacion->nivel_formacion, "Maestría") !== false) selected @endif value="Maestría">Maestría</option>
-                <option @if(strpos($data->calificacion->nivel_formacion, "Doctorado") !== false) selected @endif value="Doctorado">Doctorado</option>
-                <option @if(strpos($data->calificacion->nivel_formacion, "Posdoctorado") !== false) selected @endif value="Posdoctorado">Posdoctorado</option>
+                <option @if(strpos($data->calificacion->evaluador_nivel_formacion, "Especialización") !== false) selected @endif value="Especialización">Especialización</option>
+                <option @if(strpos($data->calificacion->evaluador_nivel_formacion, "Maestría") !== false) selected @endif value="Maestría">Maestría</option>
+                <option @if(strpos($data->calificacion->evaluador_nivel_formacion, "Doctorado") !== false) selected @endif value="Doctorado">Doctorado</option>
+                <option @if(strpos($data->calificacion->evaluador_nivel_formacion, "Posdoctorado") !== false) selected @endif value="Posdoctorado">Posdoctorado</option>
             </select>
         </div>
         <div class="col-12 col-sm-6">

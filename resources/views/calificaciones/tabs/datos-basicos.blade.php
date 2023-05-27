@@ -33,7 +33,7 @@
     <div class="row mt-3">
         <div class="col-12 col-sm-6">
             <label>Fecha de elaboración de la evaluación</label>
-            <input class="form-control" type="text"
+            <input class="form-control" type="date"
                     onfocus="focused(this)" onfocusout="defocused(this)" value="{{ $data->calificacion->created_at == null ? 'No definida' : date('d/m/Y', strtotime($data->calificacion->created_at)) }}" disabled >
         </div>
         <div class="col-12 col-sm-6">
