@@ -26,12 +26,9 @@
             <td class="text-center">{{ $variable->id }}</td>
             <td class="text-center">{{ $variable->nombre }}</td>
             <td class="text-center">
-                <a class="btn bg-gradient-dark mb-0" href="{{ route('dominio/ver', $variable->id) }}">
-                    <i class="fas fa-eye icon-action" aria-hidden="true"></i>
-                </a>
-                <a class="btn bg-gradient-dark mb-0" href="{{ route('dominio/editar', $variable->id) }}">
-                  <i class="fas fa-edit icon-action" aria-hidden="true"></i>
-                </a>           
+                <a class="btn bg-gradient-dark mb-0" href="{{ route('dominio/variables', $variable->id) }}">
+                    <i class="fas fa-cog icon-action" aria-hidden="true"></i>
+                </a>        
             </td>
           </tr>
         @endforeach

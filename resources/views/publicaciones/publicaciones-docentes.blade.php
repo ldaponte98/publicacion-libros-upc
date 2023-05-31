@@ -6,12 +6,30 @@
 </div>
 <div class="row">
   <div class="col-9">
-    <a class="btn bg-gradient-dark mb-0" onclick="enviarEvaluadores()">
+    <a id="btn-enviar" class="btn bg-gradient-dark mb-0" style="display: none;" onclick="enviarEvaluadores()">
         <i class="fas fa-send" aria-hidden="true"></i>&nbsp;&nbsp;<b id="btn-enviar">Enviar a evaluadores los seleccionados</b>
       </a>
   </div>
   <div class="col-3 btn-end">
     <input type="text" class="form-control" placeholder="Buscar..." id="filtro-publicaciones-docentes">
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label>Estado</label>
+      <select id="estado" class="form-control select2" onchange="filtrar()">
+        <option value="">TODOS</option>
+        <option value="APROBADA - SIN ENVIO A EVALUADORES">APROBADA - SIN ENVIO A EVALUADORES</option>
+        <option value="ENVIADA A COMITE EDITORIAL">ENVIADA A COMITE EDITORIAL</option>
+        <option value="RECHAZADA POR COMITE EDITORIAL">RECHAZADA POR COMITE EDITORIAL</option>
+        <option value="APROBADA - SIN ENVIO A EVALUADORES">APROBADA - SIN ENVIO A EVALUADORES</option>
+        <option value="APROBADA - EN REVISION POR EVALUADORES">APROBADA - EN REVISION POR EVALUADORES</option>
+        <option value="APROBADA">APROBADA</option>
+        <option value="RECHAZADA POR EVALUADORES">RECHAZADA POR EVALUADORES</option>
+        <option value="ANULADA">ANULADA</option>
+      </select>
+    </div>
   </div>
 </div>
 <div class="card-body px-0 pt-0 pb-2 mt-3">
@@ -33,10 +51,10 @@
           <tr>
             <td class="text-center">
                 @if($publicacion->estado == "APROBADA - SIN ENVIO A EVALUADORES")
-                    <input id="check_{{ $publicacion->id }}" class="checkbox check-publicaciones-docentes" type="checkbox">
+                    <input onchange="validarEnvio()" id="check_{{ $publicacion->id }}" class="checkbox check-publicaciones-docentes" type="checkbox">
                 @endif
             </td>
-            <td class="text-center">{{ $publicacion->tercero->nombreCompleto() }}</td>
+            <td class="text-center">{{ $publicacion->tercero->identificacion }} - {{ $publicacion->tercero->nombreCompleto() }}</td>
             <td class="text-center">{{ $publicacion->titulo_obra }}</td>
             <td class="text-center">{{ $publicacion->tipo_obra }}</td>
             <td class="text-center">{{ date('Y-m-d H:i', strtotime($publicacion->created_at)) }}</td>
@@ -86,6 +104,7 @@
     }else{
         $(".check-publicaciones-docentes").prop("checked", false)
     }
+    validarEnvio()
   }
 
   function enviarEvaluadores() {
@@ -125,6 +144,30 @@
             $("#btn-enviar").html("Enviar a evaluadores los seleccionados")
             alerta("Error", "Ocurrio un error al enviar las publicaciones, intentalo mas tarde")
         })
+    }
+  }
+
+  function filtrar() {
+    let estado = $("#estado").val()
+    var rex = new RegExp(estado, 'i');
+    $(`#tabla-publicaciones-docentes tbody tr`).hide();
+    $(`#tabla-publicaciones-docentes tbody tr`).filter(function() {
+        return rex.test($(this).text());
+    }).show();
+  }
+
+  function validarEnvio(){
+    let checks = $(".check-publicaciones-docentes")
+    let listaPublicaciones = []
+    for (let i = 0; i < checks.length; i++) {
+        let check = checks[i]
+        let idPublicacion = check.id.split("_")[1]
+        if($("#"+check.id).prop("checked")) listaPublicaciones.push(idPublicacion)
+    }
+    if(listaPublicaciones.length == 0){
+      $("#btn-enviar").fadeOut()
+    }else{
+      $("#btn-enviar").fadeIn()
     }
   }
 </script>

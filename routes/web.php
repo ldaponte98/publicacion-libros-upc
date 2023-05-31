@@ -29,8 +29,10 @@ Route::group(['prefix' => 'usuario'], function () {
 
 Route::group(['prefix' => 'dominio'], function () {
 	Route::get('listar', [DominioController::class, 'listar'])->name('dominio/listar');
+	Route::get('variables/{id}', [DominioController::class, 'variables'])->name('dominio/variables');
 	Route::get('ver/{id}', [DominioController::class, 'ver'])->name('dominio/ver');
-	Route::any('editar/{id}', [DominioController::class, 'form'])->name('dominio/editar');
+	Route::any('crear/{id_padre}', [DominioController::class, 'form'])->name('dominio/crear');
+	Route::any('editar/{id_padre}/{id}', [DominioController::class, 'form'])->name('dominio/editar');
 });
 
 Route::group(['prefix' => 'publicacion'], function () {

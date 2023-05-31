@@ -21,7 +21,7 @@
         <tr>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Usuario</th>
-          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Perfil</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de creación</th>
           <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Estado</th>
@@ -33,7 +33,7 @@
           <tr>
             <td class="text-center">{{ $usuario->id }}</td>
             <td class="text-center">{{ $usuario->usuario }}</td>
-            <td class="text-center">{{ $usuario->tercero->email }}</td>
+            <td class="text-center">{{ $usuario->tercero->identificacion }} - {{ $usuario->tercero->nombreCompleto() }}</td>
             <td class="text-center">{{ $usuario->perfil->nombre }}</td>
             <td class="text-center">{{ date('Y-m-d H:i', strtotime($usuario->created_at)) }}</td>
             <td class="text-center">

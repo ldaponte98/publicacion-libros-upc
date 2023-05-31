@@ -9,7 +9,7 @@
         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
             <label>Área del conocimiento de la obra</label>
             <select name="id_dominio_area_conocimiento" id="id_dominio_area_conocimiento" class="form-control select2" required @if($data->readonly == true) disabled @endif>
-                @php $items = \App\Models\Dominio::all()->where('padre_id', 1); @endphp
+                @php $items = \App\Models\Dominio::all()->where('padre_id', 1)->where('estado', 1); @endphp
                 @foreach ($items as $item)
                     <option @if($data->publicacion->id_dominio_area_conocimiento == $item->id)
                         selected
@@ -22,7 +22,7 @@
         <div class="col-12 col-sm-6">
             <label>Sub área del conocimiento de la obra</label>
             <select name="id_dominio_subarea_conocimiento" id="id_dominio_subarea_conocimiento" class="form-control select2" required @if($data->readonly == true) disabled @endif>
-                @php $items = \App\Models\Dominio::all()->where('padre_id', 5); @endphp
+                @php $items = \App\Models\Dominio::all()->where('padre_id', 5)->where('estado', 1); @endphp
                 @foreach ($items as $item)
                     <option @if($data->publicacion->id_dominio_subarea_conocimiento == $item->id)
                         selected
@@ -33,7 +33,7 @@
         <div class="col-12 col-sm-6">
             <label>Programa Académico y Facultad a la que está adscrito el solicitante</label>
             <select name="id_dominio_programa_academico" id="programa_academico" class="form-control select2" required @if($data->readonly == true) disabled @endif>
-                @php $items = \App\Models\Dominio::all()->where('padre_id', 10); @endphp
+                @php $items = \App\Models\Dominio::all()->where('padre_id', 10)->where('estado', 1); @endphp
                 @foreach ($items as $item)
                     <option @if($data->publicacion->id_dominio_programa_academico == $item->id)
                         selected
@@ -47,7 +47,7 @@
             <input type="hidden" name="formacion_academica" id="formacion_academica" >
             <label>Formación académica del solicitante</label>
             <select data-placeholder="Seleccione una o más..." id="select_formacion_academica" class="form-control select2" multiple required @if($data->readonly == true) disabled @endif>
-                @php $items = \App\Models\Dominio::all()->where('padre_id', 12); @endphp
+                @php $items = \App\Models\Dominio::all()->where('padre_id', 12)->where('estado', 1); @endphp
                 @foreach ($items as $item)
                     <option @if(strpos($data->publicacion->formacion_academica, $item->nombre) !== false)
                         selected
